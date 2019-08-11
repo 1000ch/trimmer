@@ -13,65 +13,47 @@
       }
       #app {
         margin: 0 auto;
-        padding: 16px;
-        max-width: 960px;
+        padding: 16px 0;
+        max-width: 640px;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <div>
-        <input
-          type="file"
-          @change="onChange"
-        >
-      </div>
       <vue-grid>
         <vue-cell width="12of12">
+          <input
+            type="file"
+            @change="onChange"
+          >
+        </vue-cell>
+        <vue-cell width="12of12">
           <vue-trim
-            style="max-width: 100%;"
+            style="width: 100%; height: 360px;"
             ref="trim"
             tag="canvas"
             :file="file"
-            @crop="onCrop"
           />
         </vue-cell>
+        <vue-cell width="6of12">
+          <label>
+            Quality:
+            <input
+              type="number"
+              v-model="quality"
+              step="10"
+            >
+          </label>
+        </vue-cell>
+        <vue-cell width="6of12">
+          <button
+            type="button"
+            @click="onClick"
+          >
+            Export
+          </button>
+        </vue-cell>
       </vue-grid>
-      <div>
-        <label>
-          x: <input type="text" :value="x" readonly>
-        </label>
-      </div>
-      <div>
-        <label>
-          y: <input type="text" :value="y" readonly>
-        </label>
-      </div>
-      <div>
-        <label>
-          width: <input type="text" :value="width" readonly>
-        </label>
-      </div>
-      <div>
-        <label>
-          height: <input type="text" :value="height" readonly>
-        </label>
-      </div>
-      <div>
-        <label>
-          scaleX: <input type="text" :value="scaleX" readonly>
-        </label>
-      </div>
-      <div>
-        <label>
-          scaleY: <input type="text" :value="scaleY" readonly>
-        </label>
-      </div>
-      <div>
-        <label>
-          rotate: <input type="text" :value="rotate" readonly>
-        </label>
-      </div>
     </div>
     <script type="module" src="./app.js"></script>
   </body>

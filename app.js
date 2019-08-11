@@ -10,13 +10,7 @@ const app = new Vue({
   data() {
     return {
       file: null,
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-      scaleX: 0,
-      scaleY: 0,
-      rotate: 0
+      quality: 90
     };
   },
   methods: {
@@ -27,16 +21,18 @@ const app = new Vue({
 
       this.file = e.target.files[0];
     },
-    onCrop() {
-      const data = this.$refs.trim.cropper.getData();
+    onClick() {
+      if (this.file === null) {
+        return;
+      }
 
-      this.x = data.x;
-      this.y = data.y;
-      this.width = data.width;
-      this.height = data.height;
-      this.scaleX = data.scaleX;
-      this.scaleY = data.scaleY;
-      this.rotate = data.rotate;
+      const { cropper } = this.$refs.trim;
+      cropper.getCroppedCanvas().toBlob(blob => {
+        const a = document.createElement('a');
+        a.download = this.file.name;
+        a.href = URL.createObjectURL(blob);
+        a.click();
+      }, this.file.type, this.quality);
     }
   }
 });
