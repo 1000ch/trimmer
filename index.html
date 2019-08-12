@@ -33,19 +33,40 @@
             ref="trim"
             tag="canvas"
             :file="file"
+            @cropmove="onCropMove"
           />
         </vue-cell>
-        <vue-cell width="6of12">
+        <vue-cell width="12of12">
           <label>
-            Quality:
+            Width:
             <input
               type="number"
-              v-model="quality"
+              v-model.number="width"
               step="10"
             >
           </label>
         </vue-cell>
-        <vue-cell width="6of12">
+        <vue-cell width="12of12">
+          <label>
+            Height:
+            <input
+              type="number"
+              v-model.number="height"
+              step="10"
+            >
+          </label>
+        </vue-cell>
+        <vue-cell width="12of12">
+          <label>
+            Quality:
+            <input
+              type="number"
+              v-model.number="quality"
+              step="10"
+            >
+          </label>
+        </vue-cell>
+        <vue-cell width="12of12">
           <button
             type="button"
             @click="onClick"

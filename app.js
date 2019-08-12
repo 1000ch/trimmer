@@ -10,8 +10,26 @@ const app = new Vue({
   data() {
     return {
       file: null,
+      width: 0,
+      height: 0,
       quality: 90
     };
+  },
+  watch: {
+    width() {
+      const { cropper } = this.$refs.trim;
+      const data = cropper.getCropBoxData();
+
+      data.width = this.width;
+      cropper.setCropBoxData(data);
+    },
+    height() {
+      const { cropper } = this.$refs.trim;
+      const data = cropper.getCropBoxData();
+
+      data.height = this.height;
+      cropper.setCropBoxData(data);
+    }
   },
   methods: {
     onChange(e) {
@@ -20,6 +38,13 @@ const app = new Vue({
       }
 
       this.file = e.target.files[0];
+    },
+    onCropMove(e) {
+      const { cropper } = this.$refs.trim;
+      const data = cropper.getCropBoxData();
+
+      this.width = data.width;
+      this.height = data.height;
     },
     onClick() {
       if (this.file === null) {
